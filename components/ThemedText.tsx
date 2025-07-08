@@ -12,7 +12,7 @@ interface ThemedTextProps {
   title?: boolean;
 }
 
-export default function ThemedText({
+export function ThemedText({
   style,
   title = false,
   ...props
