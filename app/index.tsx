@@ -1,9 +1,9 @@
+import { Spacer } from '@/components/Spacer';
+import { ThemedLogo } from '@/components/ThemedLogo';
+import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { Link } from 'expo-router';
-import { StyleSheet, Text } from 'react-native';
-import { ThemedLogo } from '@/components/ThemedLogo';
-import { Spacer } from '@/components/Spacer';
-import { ThemedText } from '@/components/ThemedText';
+import { StyleSheet } from 'react-native';
 
 // In this way we can import images without TypeScript errors "Cannot find module './..png' or its corresponding type declarations.ts(2307)"
 // const Logo = require('@/assets/images/img/logo_light.png');
@@ -18,11 +18,14 @@ export default function Home() {
       </ThemedText>
       <Spacer height={10} />
       <ThemedText>Reading List App</ThemedText>
-      <Link href='/about' style={styles.link}>
-        <ThemedText>About Page</ThemedText>
+      <Link href='/login' style={styles.link}>
+        <ThemedText>Login</ThemedText>
       </Link>
-      <Link href='/contact' style={styles.link}>
-        <ThemedText>Contact Page</ThemedText>
+      <Link href='/register' style={styles.link}>
+        <ThemedText>Register Page</ThemedText>
+      </Link>
+      <Link href='/profile' style={styles.link}>
+        <ThemedText>Profile Page</ThemedText>
       </Link>
     </ThemedView>
   );
