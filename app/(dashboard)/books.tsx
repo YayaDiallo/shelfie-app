@@ -6,7 +6,7 @@ import { ThemedView } from '@/components/ThemedView';
 
 export default function Books() {
   return (
-    <ThemedView style={styles.container}>
+    <ThemedView safe style={styles.container}>
       <Spacer />
       <ThemedText title={true} style={styles.heading}>
         Your Reading List
