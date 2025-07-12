@@ -1,12 +1,11 @@
-import { Colors } from '@/constants/Colors';
 import {
   StyleProp,
   StyleSheet,
-  useColorScheme,
   View,
   ViewProps,
   ViewStyle,
 } from 'react-native';
+import { useTheme } from './useTheme';
 
 export function ThemedCard({
   style,
@@ -14,8 +13,7 @@ export function ThemedCard({
 }: {
   style?: StyleProp<ViewStyle>;
 } & ViewProps) {
-  const colorScheme = useColorScheme();
-  const theme = Colors[colorScheme || 'light'];
+  const { theme } = useTheme();
 
   return (
     <View
