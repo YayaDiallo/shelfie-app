@@ -1,14 +1,18 @@
 import { Spacer } from '@/components/Spacer';
 import { ThemedButton } from '@/components/ThemedButton';
 import { ThemedText } from '@/components/ThemedText';
+import { ThemedTextInput } from '@/components/ThemedTextInput';
 import { ThemedView } from '@/components/ThemedView';
 import { Colors } from '@/constants/Colors';
 import { Link } from 'expo-router';
+import { useState } from 'react';
 import { StyleSheet, Text } from 'react-native';
 
 export default function Login() {
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
   const handleSubmit = () => {
-    console.log('Login button pressed');
+    console.log('Login button pressed', { email, password });
   };
 
   return (
@@ -17,6 +21,20 @@ export default function Login() {
       <ThemedText title style={styles.title}>
         Login to Your Account
       </ThemedText>
+      <ThemedTextInput
+        style={{ width: '80%', marginBottom: 20 }}
+        placeholder='Email'
+        keyboardType='email-address'
+        value={email}
+        onChangeText={setEmail}
+      />
+      <ThemedTextInput
+        style={{ width: '80%', marginBottom: 20 }}
+        placeholder='Password'
+        value={password}
+        onChangeText={setPassword}
+        secureTextEntry
+      />
       <ThemedButton onPress={handleSubmit}>
         <Text style={{ color: '#f2f2f2' }}>Login</Text>
       </ThemedButton>
