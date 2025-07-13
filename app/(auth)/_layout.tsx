@@ -1,10 +1,11 @@
-import { StyleSheet } from 'react-native';
-import { StatusBar } from 'expo-status-bar';
+import { GuestOnly } from '@/components/auth/GuestOnly';
 import { Stack } from 'expo-router';
+import { StatusBar } from 'expo-status-bar';
+import { StyleSheet } from 'react-native';
 
 export default function AuthLayout() {
   return (
-    <>
+    <GuestOnly>
       <StatusBar style='auto' />
       <Stack
         screenOptions={{
@@ -12,7 +13,7 @@ export default function AuthLayout() {
           animation: 'none',
         }}
       />
-    </>
+    </GuestOnly>
   );
 }
 
