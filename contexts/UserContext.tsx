@@ -3,6 +3,7 @@ import { createContext, useEffect, useState } from 'react';
 import { ID } from 'react-native-appwrite';
 
 export interface User {
+  $id: string;
   email: string;
   password: string;
 }
