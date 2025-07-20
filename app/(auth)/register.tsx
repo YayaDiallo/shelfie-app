@@ -11,12 +11,23 @@ import { Link } from 'expo-router';
 import { ThemedButton } from '@/components/ThemedButton';
 import { ThemedTextInput } from '@/components/ThemedTextInput';
 import { useState } from 'react';
+import { useUser } from '@/hooks/useUser';
+import { Colors } from '@/constants/Colors';
 
 export default function Register() {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const handleSubmit = () => {
-    console.log('Register button pressed', { email, password });
+  const [error, setError] = useState('');
+
+  const { register } = useUser();
+
+  const handleSubmit = async () => {
+    setError('');
+    try {
+      await register(email, password);
+    } catch (error: unknown) {
+      setError(error instanceof Error ? error.message : 'Registration failed');
+    }
   };
 
   return (
@@ -44,6 +55,8 @@ export default function Register() {
         <ThemedButton onPress={handleSubmit}>
           <Text style={{ color: '#f2f2f2' }}>Register</Text>
         </ThemedButton>
+        <Spacer />
+        {error && <Text style={styles.error}>{error}</Text>}
         <Spacer height={100} />
         <Link href='/login'>
           <ThemedText style={styles.link}>Login instead</ThemedText>
@@ -65,5 +78,14 @@ const styles = StyleSheet.create({
   },
   link: {
     textAlign: 'center',
+  },
+  error: {
+    color: Colors.warning,
+    padding: 10,
+    backgroundColor: '#f5c1c8',
+    borderColor: Colors.warning,
+    borderWidth: 1,
+    borderRadius: 6,
+    marginHorizontal: 10,
   },
 });

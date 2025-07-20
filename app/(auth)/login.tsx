@@ -4,15 +4,24 @@ import { ThemedText } from '@/components/ThemedText';
 import { ThemedTextInput } from '@/components/ThemedTextInput';
 import { ThemedView } from '@/components/ThemedView';
 import { Colors } from '@/constants/Colors';
+import { useUser } from '@/hooks/useUser';
 import { Link } from 'expo-router';
 import { useState } from 'react';
 import { StyleSheet, Text } from 'react-native';
 
 export default function Login() {
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
-  const handleSubmit = () => {
-    console.log('Login button pressed', { email, password });
+  const { login } = useUser();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+
+  const handleSubmit = async () => {
+    setError('');
+    try {
+      await login(email, password);
+    } catch (error: unknown) {
+      setError(error instanceof Error ? error.message : 'Login failed');
+    }
   };
 
   return (
@@ -38,6 +47,8 @@ export default function Login() {
       <ThemedButton onPress={handleSubmit}>
         <Text style={{ color: '#f2f2f2' }}>Login</Text>
       </ThemedButton>
+      <Spacer />
+      {error && <Text style={styles.error}>{error}</Text>}
       <Spacer height={100} />
       <Link href='/register'>
         <ThemedText style={styles.link}>Register instead</ThemedText>
@@ -66,5 +77,14 @@ const styles = StyleSheet.create({
   },
   pressed: {
     opacity: 0.8,
+  },
+  error: {
+    color: Colors.warning,
+    padding: 10,
+    backgroundColor: '#f5c1c8',
+    borderColor: Colors.warning,
+    borderWidth: 1,
+    borderRadius: 6,
+    marginHorizontal: 10,
   },
 });
